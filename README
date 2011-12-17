@@ -1,0 +1,66 @@
+Repository
+----------
+
+
+O que e isso?
+-------------
+Este projeto oferece acesso as instancias das entidades de uma aplicacao armazenadas em um banco de dados. 
+
+
+Documentacao
+------------
+As principais funcionalidades deste projeto sao:
+
+- Manter as instancias das entidades. Para isso, deve ser definido um arquivo /META-INF/persistence.xml conforme a especificacao JPA 2.
+
+ Para uso dessa funcionalidade em uma aplicacao, as entidades devem seguir estas regras:
+
+ # A classe deve estar anotada com @Entity.
+ # A classe deve implementar a interface Serializable.
+ # A classe deve ter um atributo "id" do tipo Long e anotado com @Id.
+ # A classe deve ter um atributo "version" do tipo Integer e anotado com @Version.
+ # A classe deve ter um atributo "active" do tipo Boolean.
+ # A classe deve ter um construtor publico padrao sem argumentos, ou nenhum se nao houver outros construtores.
+ # A classe deve sobrescrever os metodos "equals()" e "hashCode()".
+
+ Exemplos:
+ Keeper k = new Keeper();
+ k.persist(instance);
+ k.remove(instance);
+ k.remove(instance, RemoveEnum.LOGICAL)
+ k.remove(instance, RemoveEnum.PHYSICAL)
+
+- Recuperar as instancias das entidades. Para isso, e necessario definir a entidade e o perfil dessas instancias. Cada perfil deve ser definido por proposicoes.
+
+ Exemplos:
+ Seeker s = new Seeker();
+ List<X> list = s.seekAll(X.class);
+ List<X> list = s.seekAll(X.class, new Equals("id", 1));
+ X x = s.seekOne(X.class, new Equals("id", 1));
+ Long qtd = s.count(X.class);
+ List<X> list = s.seekByExample(instance);
+
+Para mais detalhes, consulte o projeto de exemplo: RepositoryExample 
+
+Especificacoes
+--------------
+JPA 2.0
+CDI
+
+
+Licenca
+-------
+Veja o arquivo LICENSE.
+
+
+Autores 
+-------
+Benedito Barbosa Ribeiro Neto
+Christian Linhares Peixoto
+Mauricio da Silva Marinho
+
+
+Contato
+-------
+org.wave@gmail.com
+
